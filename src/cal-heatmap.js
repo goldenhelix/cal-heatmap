@@ -220,9 +220,9 @@ var CalHeatMap = function() {
 
 		// Formatting of the title displayed when hovering a legend cell
 		legendTitleFormat: {
-			lower: "less than {min} {name}",
-			inner: "between {down} and {up} {name}",
-			upper: "more than {max} {name}"
+			lower: "{min} {name} or less",
+			inner: "{down} to {up} {name}",
+			upper: "{max} {name} or more"
 		},
 
 		// Animation duration, in ms
@@ -3281,11 +3281,20 @@ Legend.prototype.redraw = function(width) {
 				name: options.itemName[1]
 			});
 		} else {
-			return calendar.formatStringWithObject(options.legendTitleFormat.inner, {
-				down: options.legend[i-1],
-				up: options.legend[i],
-				name: options.itemName[1]
-			});
+            if (options.legend[i-1] + 1 == options.legend[i]) {
+                return calendar.formatStringWithObject(options.legendTitleFormat.inner, {
+                    down: options.legend[i-1] + 1,
+                    up: options.legend[i],
+                    name: options.itemName[1]
+                });
+            }
+            else {
+                return calendar.formatStringWithObject(options.legendTitleFormat.inner, {
+                    down: options.legend[i-1] + 1,
+                    up: options.legend[i] - 1,
+                    name: options.itemName[1]
+                });
+            }
 		}
 	})
 	;
