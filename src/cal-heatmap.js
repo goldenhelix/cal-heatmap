@@ -2670,7 +2670,7 @@ CalHeatMap.prototype = {
 
 	parseURI: function(str, startDate, endDate) {
         "use strict";
-        endDate.setDate(endDate.getDate() + 1)
+        endDate.setDate(endDate.getDate() + 1);
 
 		// Use a timestamp in seconds
 		str = str.replace(/\{\{t:start\}\}/g, startDate.getTime()/1000);
